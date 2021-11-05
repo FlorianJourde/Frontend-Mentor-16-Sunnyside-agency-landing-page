@@ -25,6 +25,7 @@
   --ff-primary: Barlow, sans-serif;
   --ff-secondary: Fraunces, serif;
   --pad-primary: 2rem 1.5rem;
+  --tr-primary: 0.3s all ease-in-out;
 }
 
 *, ::before, ::after {
@@ -33,10 +34,14 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 nav .navigation {
   padding: 1.5rem;
   display: none;
-  transition: 0.5s all ease-in-out;
+  transition: var(--tr-primary);
 }
 
 nav .active {
@@ -67,7 +72,7 @@ nav .active:before {
   margin-top: -20px;
 }
 
-nav .active a {
+nav .active li {
   margin: 1em;
   color: var(--clr-grayish-blue);
   font-size: var(--fs-h4);
@@ -80,7 +85,7 @@ display: inline;
 padding: 1rem 2rem;
 margin-right: auto;
 margin-left: auto;
-color: var(--clr-dark-blue);
+  color: var(--clr-very-dark-desaturated-blue);
 font-family: var(--ff-secondary);
 border-radius: 5rem;
 font-size: var(--fs-h3);
@@ -99,12 +104,13 @@ body {
   font-family: var(--ff-primary);
 }
 
-main {
+.wrapper {
+  position: relative;
   background-color: var(--clr-cream);
   width: 375px;
 }
 
-main > *:not(.sections, .banneer), .sections > * {
+.wrapper > *:not(.services, .banneer), .services > * {
   padding: var(--pad-primary);
 }
 
@@ -172,7 +178,11 @@ p {
 
 a, i {
   text-decoration: none;
-  transition: 0.3s color ease-in-out;
+  transition: var(--tr-primary);
+}
+
+ul {
+  list-style-type: none;
 }
 
 footer a:hover, footer i:hover {
@@ -184,8 +194,9 @@ header {
   background-position: bottom;
   background-size: cover;
   height: 540px;
-  justify-content: center;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
 }
 
@@ -197,6 +208,9 @@ header img {
   object-fit: contain;
   height: 110px;
   animation: arrow 1s infinite;
+}
+header a {
+  width: fit-content;
 }
 
 @keyframes arrow {
@@ -211,96 +225,108 @@ header img {
   }
 }
 
-.sections h2 {
+.services h2 {
   margin: 1em 0;
 }
 
-.sections p, .sections a {
+.services p, .services a {
   margin-bottom: 1.8em;
   display: inline-block;
 }
 
-#section-1 {
-  grid-area: section-1;
+#service-1 {
+  grid-area: service-1;
   background-image: url("images/mobile/image-transform.jpg");
   background-size: cover;
   background-position: center;
   height: 310px;
 }
 
-#section-2 {
-  grid-area: section-2;
+#service-2 {
+  grid-area: service-2;
 }
 
-#section-2 a {
+.learn {
+  position: relative;
+  z-index: 0;
+}
+
+.learn::after {
+  content: "";
+  position: absolute;
+  width: 110%;
+  height: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 2px;
+  border-radius: 8px;
+  z-index: -1;
+  transition: var(--tr-primary);
+}
+
+.yellow::after {
   background-color: var(--clr-yellow-transparent);
-  background-image: linear-gradient(var(--clr-cream) 60%, var(--clr-yellow-transparent) 40%);
-  transition: 0.3s background-color ease-in-out;
-  padding-left: 10px;
-  padding-right: 10px;
 }
 
-#section-2 a:hover {
+.yellow:hover::after {
   background-color: var(--clr-yellow);
 }
 
-#section-3 {
-  grid-area: section-3;
+.red::after {
+  background-color: var(--clr-soft-red-transparent);
+}
+
+.red:hover::after {
+  background-color: var(--clr-soft-red);
+}
+
+#service-3 {
+  grid-area: service-3;
   background-image: url("images/mobile/image-stand-out.jpg");
   background-position: center;
   background-size: cover;
   min-height: 310px;
 }
 
-#section-4 {
-  grid-area: section-4;
+#service-4 {
+  grid-area: service-4;
 }
 
-#section-4 a {
-  background-color: var(--clr-soft-red-transparent);
-  background-image: linear-gradient(var(--clr-cream) 60%, var(--clr-soft-red-transparent) 40%);
-  transition: 0.3s background-color ease-in-out;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-#section-4 a:hover {
-  background-color: var(--clr-soft-red);
-}
-
-#section-5 {
-  grid-area: section-5;
+#service-5 {
+  grid-area: service-5;
   background-image: url("images/mobile/image-graphic-design.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center top;
   height: 600px;
-  padding-top: 22rem;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
-#section-5 p, #section-5 h2 {
+#service-5 p, #service-5 h2 {
   color: var(--clr-dark-desaturated-cyan);
 }
 
-#section-5 h2, #section-6 h2 {
+#service-5 h2, #service-6 h2 {
   font-size: var(--fs-h2-secondary);
 }
 
-#section-5 p, #section-6 p {
+#service-5 p, #service-6 p {
   font-size: var(--fs-body-secondary);
 }
 
-#section-6 {
-  grid-area: section-6;
+#service-6 {
+  grid-area: service-6;
   background-image: url("images/mobile/image-photography.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center top;
   height: 600px;
-  padding-top: 22rem;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
-#section-6 p, #section-6 h2 {
+#service-6 p, #service-6 h2 {
   color: var(--clr-dark-blue);
 }
 
@@ -367,6 +393,8 @@ footer .logo {
 
 footer .navigation {
   margin-bottom: 6rem;
+  display: flex;
+  justify-content: center;
 }
 
 footer a {
@@ -375,23 +403,25 @@ footer a {
   font-size: var(--fs-body);
 }
 
-footer a + a {
+footer li + li {
   margin-left: 3em;
 }
 
 footer .links {
   margin-bottom: 3rem;
+  display: flex;
+  justify-content: center;
 }
 
 footer .links a {
   color: var(--clr-dark-desaturated-cyan);
 }
 
-footer .links a + a {
+footer .links li + li {
   margin-left: 1.5rem;
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 800px) {
   :root {
     --fs-h1: 3.4rem;
     --fs-h2: 2.5rem;
@@ -400,13 +430,14 @@ footer .links a + a {
     --fs-h3: 1.2rem;
   }
 
-  main {
+  .wrapper {
     background-color: var(--clr-cream);
-    width: 1450px;
+    width: 100%;
+    max-width: 1450px;
   }
 
   nav .navigation {
-    display: block;
+    display: flex;
   }
 
   nav .logo {
@@ -418,7 +449,7 @@ footer .links a + a {
     color: var(--clr-white);
   }
 
-  nav a + a {
+  nav li + li {
     margin-left: 3em;
   }
 
@@ -428,7 +459,7 @@ footer .links a + a {
     padding: 1.1em 1.8em;
     font-family: var(--ff-secondary);
     color: var(--clr-very-dark-desaturated-blue);
-    transition: 0.3s all ease-in-out;
+    transition: var(--tr-primary);
   }
 
   #contact:hover {
@@ -450,77 +481,87 @@ footer .links a + a {
     margin-bottom: 1.5em;
   }
 
-  .sections {
+  .services {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 0;
     grid-template-areas:
-      "section-2 section-1"
-      "section-3 section-4"
-      "section-5 section-6";
+      "service-2 service-1"
+      "service-3 service-4"
+      "service-5 service-6";
   }
 
-  main .sections > * {
+  .wrapper .services > * {
+  }
+
+  #service-1 {
     height: 100%;
-  }
-
-  #section-1 {
     min-height: 600px;
   }
 
-  #section-2 {
+  #service-2 {
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: left;
-    padding-left: 10rem;
-    padding-right: 8rem;
+    max-width: 40rem;
+    margin-left: auto;
+    margin-right: 0;
   }
 
-  #section-3 {
+  #service-3 {
+    height: 100%;
   }
 
-  #section-4 {
+  #service-4 {
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: left;
-    padding-left: 8rem;
-    padding-right: 10rem;
+    max-width: 40rem;
+    margin-left: 0;
+    margin-right: auto;
   }
 
-  #section-5 p, #section-6 p {
+  #service-5 p, #service-6 p {
     margin-bottom: 0;
   }
 
-  #section-5 {
+  #service-5 {
+    height: 100%;
     background-image: url("images/desktop/image-graphic-design.jpg");
-    padding-left: 12rem;
-    padding-right: 12rem;
-    padding-top: 23rem;
+    padding-top: 0;
   }
 
-  #section-6 {
+  .services .content {
+    max-width: 25rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #service-6 {
+    height: 100%;
     background-image: url("images/desktop/image-photography.jpg");
-    padding-left: 12rem;
-    padding-right: 12rem;
-    padding-top: 23rem;
   }
 
-  main .testimonials {
-    padding: 10.4rem 9rem;
+  .wrapper .testimonials {
+    padding: 10.4rem 0;
   }
 
   .testimonials-section {
     display: flex;
+    max-width: 72rem;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .testimonials h3 {
     margin-top: 1rem;
     margin-bottom: 3rem;
   }
-
 
   .testimonials img {
     margin: 0 0 3rem 0;
